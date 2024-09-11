@@ -23,6 +23,4 @@ router.get('/home', controller.authenticateToken, controller.home);
 // Logout route
 router.get('/logout', controller.logout);
 
-router.get('/*', controller.loginPage);
-
 module.exports = router; // Correct export
