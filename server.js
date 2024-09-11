@@ -25,6 +25,14 @@ mongoose.connect(dbURI)
 .catch(err => console.log(err));
 
 app.use(express.json()); // To handle JSON requests
+
+app.use((req, res, next) => {
+  if (req.path === '/') {
+    return res.redirect('/maid-match/login'); // Redirect when the initial route is '/'
+  }
+  next(); // Continue to other routes
+});
+
 app.use('/maid-match/', route); // Correct route usage
 
 // Start the server
