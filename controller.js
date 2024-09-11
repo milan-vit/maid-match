@@ -85,7 +85,7 @@ const login = async (req, res) => {
             return res.render('login', { error: 'Invalid credentials' });
         }
 
-        const accessToken = jwt.sign({ email: user.email }, JWT_SECRET, { expiresIn: '1h' });
+        const accessToken = jwt.sign({ email: user.email, name: user.name }, JWT_SECRET, { expiresIn: '1h' });
         // Redirect to home.ejs after login
         res.redirect(`/maid-match/home?token=${accessToken}`);
     } catch (error) {
@@ -96,7 +96,7 @@ const login = async (req, res) => {
 
 // Serve the home page (protected route)
 const home = (req, res) => {
-    res.render('home', { email: req.user.email }); // Pass user email to home.ejs
+    res.render('home', { name: req.user.name, email: req.user.email });
 };
 
 // Handle logout
